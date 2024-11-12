@@ -1,82 +1,96 @@
 workflow2:
   m_def: nomad_neb_workflows.schema_packages.neb.NEBWorkflow
   inputs:
-    - name: Initial state
-      section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb0.traj#/run/0/system/-1'
-    - name: Final state
-      section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb6.traj#/run/0/system/-1'
+    - name: Input structure for reference image
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb0.traj#/run/0/system/-1'
+    - name: Input structure for image 1
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0000/log#/run/0/system/-1'
+    - name: Input structure for image 2
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0001/log#/run/0/system/-1'
+    - name: Input structure for image 3
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0002/log#/run/0/system/-1'
+    - name: Input structure for image 4
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0003/log#/run/0/system/-1'
+    - name: Input structure for image 5
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0004/log#/run/0/system/-1'
+    - name: Input structure for image 6
+      section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb6.traj#/run/0/system/-1'
   outputs:
-    - name: NEB1 splitting of C-O bond in CH3O
+    - name: Output for reference image
+      section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb0.traj#/run/0/calculation/-1'
+    - name: Output for image 1
       section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0000/log#/run/0/calculation/-1'
-    - name: NEB2 splitting of C-O bond in CH3O
+    - name: Output for image 2
       section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0001/log#/run/0/calculation/-1'
-    - name: NEB3 splitting of C-O bond in CH3O
+    - name: Output for image 3
       section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0002/log#/run/0/calculation/-1'
-    - name: NEB4 splitting of C-O bond in CH3O
+    - name: Output for image 4
       section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0003/log#/run/0/calculation/-1'
-    - name: NEB5 splitting of C-O bond in CH3O
+    - name: Output for image 5
       section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0004/log#/run/0/calculation/-1'
+    - name: Output for image 6
+      section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb6.traj#/run/0/calculation/-1'
   tasks:
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
       task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb0.traj#/workflow2'
-      name: initial state reference simulation
+      name: Reference image simulation
       inputs:
-        - name: Initial structure
+        - name: Input structure for reference image
           section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb0.traj#/run/0/system/-1'
       outputs:
-        - name: Output scf simulation
+        - name: Output for reference image
           section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb0.traj#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb1.traj#/workflow2'
-      name: NEB1 splitting of C-O bond in CH3O
+      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0000/log#/workflow2'
+      name: Image 1 simulation
       inputs:
-        - name: Initial structure
-          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb1.traj#/run/0/system/-1'
+        - name: Input structure for image 1
+          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0000/log#/run/0/system/-1'
       outputs:
-        - name: Output NEB1 splitting of C-O bond in CH3O
-          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb1.traj#/run/0/calculation/-1'
+        - name: Output for image 1
+          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0000/log#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb2.traj#/workflow2'
-      name: NEB2 splitting of C-O bond in CH3O
+      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0001/log#/workflow2'
+      name: Image 2 simulation
       inputs:
-        - name: Initial structure
-          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb2.traj#/run/0/system/-1'
+        - name: Input structure for image 2
+          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0001/log#/run/0/system/-1'
       outputs:
-        - name: Output NEB2 splitting of C-O bond in CH3O
-          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb2.traj#/run/0/calculation/-1'
+        - name: Output for image 2
+          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0001/log#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb3.traj#/workflow2'
-      name: NEB3 splitting of C-O bond in CH3O
+      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0002/log#/workflow2'
+      name: Image 3 simulation
       inputs:
-        - name: Initial structure
-          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb3.traj#/run/0/system/-1'
+        - name: Input structure for image 3
+          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0002/log#/run/0/system/-1'
       outputs:
-        - name: Output NEB3 splitting of C-O bond in CH3O
-          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb3.traj#/run/0/calculation/-1'
+        - name: Output for image 3
+          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0002/log#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb4.traj#/workflow2'
-      name: NEB4 splitting of C-O bond in CH3O
+      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0003/log#/workflow2'
+      name: Image 4 simulation
       inputs:
-        - name: Initial structure
-          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb4.traj#/run/0/system/-1'
+        - name: Input structure for image 4
+          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0003/log#/run/0/system/-1'
       outputs:
-        - name: Output NEB4 splitting of C-O bond in CH3O
-          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb4.traj#/run/0/calculation/-1'
+        - name: Output for image 4
+          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0003/log#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb5.traj#/workflow2'
-      name: NEB5 splitting of C-O bond in CH3O
+      task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0004/log#/workflow2'
+      name: Image 5 simulation
       inputs:
-        - name: Initial structure
-          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb5.traj#/run/0/system/-1'
+        - name: Input structure for image 5
+          section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0004/log#/run/0/system/-1'
       outputs:
-        - name: Output NEB5 splitting of C-O bond in CH3O
-          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb5.traj#/run/0/calculation/-1'
+        - name: Output for image 5
+          section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/ekspressen_0004/log#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
       task: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb6.traj#/workflow2'
-      name: SCF Simulation
+      name: Image 6 simulation
       inputs:
-        - name: Final state
+        - name: Input structure for image 6
           section:  '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb6.traj#/run/0/system/-1'
       outputs:
-        - name: Output scf simulation
+        - name: Output for image 6
           section: '../upload/archive/mainfile/NEB_CuCuZn_211CH3-O/neb6.traj#/run/0/calculation/-1'
