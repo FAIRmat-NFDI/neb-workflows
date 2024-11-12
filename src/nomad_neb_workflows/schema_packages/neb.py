@@ -11,8 +11,7 @@ if TYPE_CHECKING:
     )
 
 from nomad.config import config
-from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
-from nomad.metainfo import Quantity, SchemaPackage, Context, Quantity, Section
+from nomad.metainfo import Quantity, SchemaPackage, Quantity
 from simulationworkflowschema import SimulationWorkflow
 
 configuration = config.get_plugin_entry_point(
@@ -61,23 +60,19 @@ class NEBWorkflow(SimulationWorkflow):
             Optional[pint.Quantity]: The total energy differences of the system for each of the images in the path of configurations in units of energies.
         """
         # Resolve the reference of energies from the first NEB task
-        scf_task = self.tasks[1]
-        if scf_task.m_xpath('outputs[0].section.energy.total.value') is None:
+        ref_image_task = self.tasks[0]
+        if ref_image_task.m_xpath('outputs[0].section.energy.total.value') is None:
             logger.error(
                 'Could not resolved the initial value of the total energy for referencing.'
             )
             return None
-        energy_reference = scf_task.outputs[0].section.energy.total.value.m
-        energy_units = scf_task.outputs[0].section.energy.total.value.u
+        energy_reference = ref_image_task.outputs[0].section.energy.total.value.m
+        energy_units = ref_image_task.outputs[0].section.energy.total.value.u
 
         # Append the energy differences of the images w.r.t. the reference of energies
         tot_energies = []
         for output in self.outputs:
-            if output.section.energy.total.value.m - energy_reference < 0:
-                logger.error(
-                    'The total energy differences of any image must be positive.'
-                )
-                return None
+            # TODO add condition here to check if output.section.energy.total.value.m exists or not
             tot_energies.append(output.section.energy.total.value.m - energy_reference)
         return tot_energies * energy_units
 
