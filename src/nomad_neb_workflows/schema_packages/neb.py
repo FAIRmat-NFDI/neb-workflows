@@ -72,11 +72,7 @@ class NEBWorkflow(SimulationWorkflow):
         # Append the energy differences of the images w.r.t. the reference of energies
         tot_energies = []
         for output in self.outputs:
-            if output.section.energy.total.value.m - energy_reference < 0:
-                logger.error(
-                    'The total energy differences of any image must be positive.'
-                )
-                return None
+            # TODO add condition here to check if output.section.energy.total.value.m exists or not
             tot_energies.append(output.section.energy.total.value.m - energy_reference)
         return tot_energies * energy_units
 
